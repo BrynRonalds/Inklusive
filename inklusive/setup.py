@@ -3,4 +3,4 @@
 
 from setuptools import setup, find_packages
 
-setup(name="topmtlink", version="0.1)
+setup(name="inklusive", version="0.1)
