@@ -2,42 +2,17 @@
 
 import skimage.io
 from skimage.transform import resize
-from multiprocessing import Pool
+from PIL import Image
 
-# Read image
-def read_img(filePath):
-    return skimage.io.imread(filePath, as_gray=False)
 
-# Read images with common extensions from a directory
-def read_imgs_dir(dirPath, extensions, parallel=True):
-    args = [os.path.join(dirPath, filename)
-            for filename in os.listdir(dirPath)
-            if any(filename.lower().endswith(ext) for ext in extensions)]
-    if parallel:
-        pool = Pool()
-        imgs = pool.map(read_img, args)
-        pool.close()
-        pool.join()
-    else:
-        imgs = [read_img(arg) for arg in args]
-    return imgs
-
-# Save image to file
-def save_img(filePath, img):
-    skimage.io.imsave(filePath, img)
-
-# Normalize image data [0, 255] -> [0.0, 1.0]
-def normalize_img(img):
-    return img / 255.
-
-# Resize image
-def resize_img(img, shape_resized):
-    img_resized = resize(img, shape_resized,
+def image_transform(test_img_path, shape_resize):
+    """
+    Resize and normalize the input image
+    """
+    image = skimage.io.imread(test_img_path, as_gray=False)
+    img_resized = resize(image, shape_resize,
                          anti_aliasing=True,
                          preserve_range=True)
-    assert img_resized.shape == shape_resized
+    assert img_resized.shape == shape_resize
+    img_resized = img_resized / 255.0
     return img_resized
-
-# Flatten image
-def flatten_img(img):
-    return img.flatten("C")

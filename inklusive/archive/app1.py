@@ -64,6 +64,7 @@ def upload_file():
 			flash('No file')
 			return redirect(request.url)
 		img_file = request.files['file']
+		img_folder_path = app.config['UPLOAD_FOLDER']
 		if img_file.filename == '':
 			flash('No selected file!')
 			return redirect(request.url)

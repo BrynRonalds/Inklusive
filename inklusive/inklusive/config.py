@@ -3,6 +3,7 @@
 import os
 
 path_project = '/Users/brynronalds/Insight/proj_dir/'
+path_models = os.path.join(path_project,'models')
 path_data = os.path.join(path_project,'data')
 path_data_raw = os.path.join(path_data,'raw')
 path_data_proc = os.path.join(path_data,'processed')
