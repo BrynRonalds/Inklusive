@@ -1,7 +1,7 @@
 # [Inklusive](http://inklusive.xyz/): Think about your Ink
 ![alt text](./image/website_front.jpg)
 
-*Recommend tattoo artists based user-submitted image and a curated list of inclusive Montreal tattoo studios*
+*Recommend tattoo artists based on user-submitted images and a curated list of inclusive Montreal tattoo studios*
 
 ### What is Inklusive
 
@@ -35,6 +35,12 @@ Now that I had the CNN model to classify the images, I ran all of the instagram 
 ### Image similarity:
 
 Next is the essence of the product: train a model to extract key features from the images, and then train a nearest neighbours model on those features. This way, when a user uploads an image, it is similarly passed through both models, with an output of *k* similar images. 
+
+The VGG19 convolutional neural network is used for feature extraction. This 19-layer model is trained on the ImageNet LSVRC-2014 dataset, with 1.2 million training images and 1000 classification categories. When applied to the tattoo image dataset the model extracts key features, giving predictive values as to what those features represent. An sklearn NearestNeighbors algorithm is then applied to the predictions to find the most similar images.
+
+Once the NearestNeighbors model is trained on the entire dataset it is then saved, and later applied to the user-input image.
+
+![alt text](./image/demo_suggest.jpg)
 
 
 
